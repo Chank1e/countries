@@ -27,7 +27,8 @@
         <tr>
           <th :class="{'sorted':sort.field=='name',
                        'ascending':sort.field=='name'&&sort.type=='asc',
-                       'descending':sort.field=='name'&&sort.type=='desc'}" @click="setSort('name')">
+                       'descending':sort.field=='name'&&sort.type=='desc'}" @click="setSort('name')"
+          >
             Name
           </th>
           <th>Capital</th>
@@ -35,7 +36,8 @@
           <th>Subregion</th>
           <th :class="{'sorted':sort.field=='population',
                        'ascending':sort.field=='population'&&sort.type=='asc',
-                       'descending':sort.field=='population'&&sort.type=='desc'}" @click="setSort('population')">
+                       'descending':sort.field=='population'&&sort.type=='desc'}" @click="setSort('population')"
+          >
             Population
           </th>
           <th>Domains</th>
@@ -92,7 +94,8 @@
       }
     }),
     mounted() {
-      this.getCountries();
+      if(this.countries.length==0)
+        this.getCountries();
     },
     methods: {
       changePage(page) {
@@ -129,7 +132,7 @@
         'page',
         'meta'
       ]),
-    },
+    }
   }
 
 </script>

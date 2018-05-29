@@ -85,6 +85,7 @@ export default new VueX.Store({
         else if(page==='first')
             state.page = 1;
       },
+      
       updateField
   },
   actions:{
@@ -108,7 +109,7 @@ export default new VueX.Store({
         if(state.filters.region)
             params_str+=`&filter[region]=${encodeURIComponent(state.filters.region)}`;
         if(state.filters.subregion)
-            params_str+=`&filter[subregion]=${encodeURIComponent(state.filters.subregion)}`;
+            params_str+=`&filter[sub_region]=${encodeURIComponent(state.filters.subregion)}`;
         
         if(state.sort.type!==''&&state.sort.field!=='')
             params_str+=`&sort=${state.sort.type=='desc'?'-':''}${state.sort.field}`;
@@ -152,13 +153,14 @@ export default new VueX.Store({
         
       },
       sortCountries({dispatch,commit},sort){
-          commit(TYPES.UPDATE_PAGE,'first');
-          commit(TYPES.SET_SORT,sort);
-          dispatch('getCountries','');
+        commit(TYPES.UPDATE_PAGE,'first');
+        commit(TYPES.SET_SORT,sort);
+        dispatch('getCountries','');
       },
       resetSorting({commit, dispatch}){
-          commit(TYPES.RESET_SORT);
-          dispatch('getCountries','')
+        commit(TYPES.UPDATE_PAGE,'first');
+        commit(TYPES.RESET_SORT);
+        dispatch('getCountries','')
       }
   },
   getters: {
