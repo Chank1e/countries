@@ -122,8 +122,14 @@ export default new VueX.Store({
                 toastr.error(`Can't find countries`);
             })
       },
-      changePage({commit, dispatch},page){
+      changePage({commit, dispatch, state},page){
           if(page){
+            let next = state.page+1;
+            let prev = state.page-1;
+            if(page=='next'&&next>state.meta.pages)
+                return ;
+            if(page=='prev'&&prev<1)
+                return ;
             commit(TYPES.UPDATE_PAGE,page);
             dispatch('getCountries',page);
           }

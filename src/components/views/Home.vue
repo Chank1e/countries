@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <button class="ui primary button" @click="getCountries">
+    <button class="ui primary button" @click="getCountries(true)">
       Update
     </button>
     <button class="ui button" @click="resetSorting">
@@ -101,7 +101,11 @@
       showMore(id) {
         this.$store.dispatch('openMorePage', id);
       },
-      getCountries() {
+      getCountries(first_page) {
+        if(first_page){
+          this.$store.dispatch('changePage','first');
+          return ;
+        }
         this.$store.dispatch('getCountries');
       },
       resetSorting() {
