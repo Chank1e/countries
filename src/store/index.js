@@ -90,7 +90,7 @@ export default new VueX.Store({
   actions:{
       getCountries({commit, state},str){
         let params_str;
-        const default_params = `/v1/countries?page[number]=${state.page}&page[size]=${state.pageSize}`;
+        const default_params = `/v1/countries?page[number]=1&page[size]=20`;
         if(str==='next')
             params_str = state.links.next;
         else if(str==='prev')
@@ -152,6 +152,7 @@ export default new VueX.Store({
         
       },
       sortCountries({dispatch,commit},sort){
+          commit(TYPES.UPDATE_PAGE,'first');
           commit(TYPES.SET_SORT,sort);
           dispatch('getCountries','');
       },
